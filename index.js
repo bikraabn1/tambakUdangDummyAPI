@@ -6,7 +6,10 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-app.use(cors());
+app.use(cors({
+  origin : 'http://localhost:3000',
+  methods : ['GET', 'POST', 'POST']
+}));
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Web Server is running');
@@ -51,7 +54,7 @@ wss.on('connection', (ws) => {
 });
 
 // Menjalankan server HTTP dan WebSocket
-const PORT = 5000;
+const PORT = 5500;
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
